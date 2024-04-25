@@ -12,14 +12,15 @@ ajv.addFormat('date', {
 const schema ={
   type: "object",
   properties: {
-      Amount: { type: "number" }, 
-      Category: { type: "string" },
-      Group: { type: "string", enum: ["finance", "savings"] }, 
-      Type: { type: "string", enum: ["expense", "income"] },
-      Name: { type: "string" },
-      Date: { type: "string", format: "date"}, 
-      Place: { type: "string" },
-      userId: { type: "string" }
+    Amount: { type: "number" },
+    Group: { type: "string", enum: ["finance", "savings"] },
+    Type: { type: "string", enum: ["expense", "income"] },
+    Name: { type: "string" },
+    Date: { type: "string", format: "date" },
+    Place: { type: "string" },
+    categoryId: { type: "string" },
+    savingPlanId: { type: "string" },
+    userId: { type: "string" }
   },
   required: ["id", "userId"],
   additionalProperties: false

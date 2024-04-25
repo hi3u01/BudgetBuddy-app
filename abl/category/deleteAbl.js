@@ -1,6 +1,7 @@
 const Ajv = require("ajv");
 const ajv = new Ajv();
 const categoryDao = require("../../dao/category-dao.js");
+const financeDao = require("../../dao/finance-dao.js");
 
 const schema = {
   type: "object",
@@ -27,6 +28,16 @@ async function deleteAbl(req, res) {
     }
 
     categoryDao.remove(reqParams.id);
+
+    const financeList = financeDao.list();
+    const finance = financeList.find(finance => finance.categoryId === reqParams.id);
+    
+    if (finance) {
+      finance.categoryId = ""; 
+      financeDao.update(finance);
+    }
+    
+
     res.json({});
   } catch (e) {
     res.status(500).json({ message: e.message });

@@ -23,6 +23,8 @@ function create(category) {
     const filePath = path.join(categoryFolderPath, `${category.id}.json`);
     const fileData = JSON.stringify(category);
 
+    
+
     fs.writeFileSync(filePath, fileData, "utf8");
     return category;
   } catch (error) {
@@ -51,6 +53,7 @@ function remove(categoryId) {
     const filePath = path.join(categoryFolderPath, `${categoryId}.json`);
     fs.unlinkSync(filePath);
     return {};
+
   } catch (error) {
     if (error.code === "ENOENT") return {};
     throw { code: "failedToRemoveCategory", message: error.message };

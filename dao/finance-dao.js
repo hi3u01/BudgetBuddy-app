@@ -57,10 +57,25 @@ function remove(financeId) {
   }
 }
 
+// Method to list finance in a folder
+function list() {
+  try {
+    const files = fs.readdirSync(financeFolderPath);
+    const financeList = files.map((file) => {
+      const fileData = fs.readFileSync(path.join(financeFolderPath, file), "utf8");
+      return JSON.parse(fileData);
+    });
+    return financeList;
+  } catch (error) {
+    throw { code: "failedToListfinance", message: error.message };
+  }
+}
+
 
 module.exports = {
   get,
   create,
   update,
   remove,
+  list
 };

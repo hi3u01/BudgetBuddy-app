@@ -15,7 +15,6 @@ const schema = {
     type: "object",
     properties: {
         Amount: { type: "number" },
-        Group: { type: "string", enum: ["finance", "savings"] },
         Type: { type: "string", enum: ["expense", "income"] },
         Name: { type: "string" },
         Date: { type: "string", format: "date" },
@@ -24,7 +23,7 @@ const schema = {
         savingPlanId: { type: "string" },
         userId: { type: "string" }
     },
-    required: ["Amount", "Group", "Type", "userId",],
+    required: ["Amount", "Type", "userId",],
     additionalProperties: false
 };
 
