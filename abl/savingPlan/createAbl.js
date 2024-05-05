@@ -19,7 +19,7 @@ const schema ={
         Name: {type: "string"},
         userId: {type: "string"}
     },
-    required: ["goalAmount","Name","userId"],
+    required: ["goalAmount","Name"],
     additionalProperties: false,
 };
 
@@ -47,17 +47,17 @@ async function createAbl(req, res) {
         });
         return;
       }
-      //existence user
-      const userList = userDao.list();
-      const userExists = userList.some((user) => user.id === savingPlan.userId)
+      // //existence user
+      // const userList = userDao.list();
+      // const userExists = userList.some((user) => user.id === savingPlan.userId)
       
-      if (!userExists){
-        res.status(400).json({
-          code: "userIdNotExists",
-          message: `userId ${category.userId} does not exist`,
-        }); 
-        return;
-      }
+      // if (!userExists){
+      //   res.status(400).json({
+      //     code: "userIdNotExists",
+      //     message: `userId ${category.userId} does not exist`,
+      //   }); 
+      //   return;
+      // }
 
       savingPlan = savingPlanDao.create(savingPlan);
       res.json(savingPlan);

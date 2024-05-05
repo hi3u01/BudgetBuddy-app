@@ -14,16 +14,16 @@ ajv.addFormat('date', {
 const schema = {
     type: "object",
     properties: {
-        Amount: { type: "number" },
-        Type: { type: "string", enum: ["expense", "income"] },
-        Name: { type: "string" },
-        Date: { type: "string", format: "date" },
-        Place: { type: "string" },
+        amount: { type: "number" },
+        type: { type: "string", enum: ["expense", "income"] },
+        name: { type: "string" },
+        date: { type: "string", format: "date" },
+        place: { type: "string" },
         categoryId: { type: "string" },
         savingPlanId: { type: "string" },
         userId: { type: "string" }
     },
-    required: ["Amount", "Type", "userId",],
+    required: ["amount", "type", "date"],
     additionalProperties: false
 };
 
@@ -43,28 +43,30 @@ async function createAbl(req, res) {
         }
 
         // existence category
-        const categoryList = categoryDao.list();
-        const categoryExists = categoryList.some((u) => u.id === finance.categoryId);
+        if (finance.categoryId) { // Provádět validaci pouze pokud je categoryId definováno
+            const categoryList = await categoryDao.list();
+            const categoryExists = categoryList.some((u) => u.id === finance.categoryId);
 
-        if (!categoryExists) {
-            res.status(400).json({
-                code: "categoryNotExists",
-                message: `category ${finance.categoryId} does not exist`,
-            });
-            return;
+            if (!categoryExists) {
+                res.status(400).json({
+                    code: "categoryNotExists",
+                    message: `category ${finance.categoryId} does not exist`,
+                });
+                return;
+            }
         }
 
-        // existence user
-        const userList = userDao.list();
-        const userExists = userList.some((user) => user.id === finance.userId);
+        // // existence user
+        // const userList = userDao.list();
+        // const userExists = userList.some((user) => user.id === finance.userId);
 
-        if (!userExists) {
-            res.status(400).json({
-                code: "userIdNotExists",
-                message: `userId ${finance.userId} does not exist`,
-            });
-            return;
-        }
+        // if (!userExists) {
+        //     res.status(400).json({
+        //         code: "userIdNotExists",
+        //         message: `userId ${finance.userId} does not exist`,
+        //     });
+        //     return;
+        // }
          //adding finance to savingPlan
         if (finance.savingPlanId) {
             const selectedSavingPlan = savingPlanDao.get(finance.savingPlanId);
@@ -76,7 +78,7 @@ async function createAbl(req, res) {
                 });
                 return;
             }
-            selectedSavingPlan.savedAmount += finance.Amount;
+            selectedSavingPlan.savedAmount += finance.amount;
             savingPlanDao.update(selectedSavingPlan);
         }
 
