@@ -1,0 +1,12 @@
+.contentContainer {
+    display: flex;
+  }
+  
+  .barsContainer {
+    flex: 2; 
+    margin-right: 10px;
+  }
+  
+  .formContainer {
+    flex: 1;
+  }

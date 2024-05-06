@@ -1,0 +1,32 @@
+.home {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.contentContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1300px;
+  padding: 20px;
+}
+
+.dateFilterContainer {
+  flex: 1 1 250px; 
+  text-align: center;
+}
+
+.diagramContainer {
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.barsContainer {
+  flex: 1 1 250px;
+  justify-content: center;
+  align-items: stretch; 
+}
+
+
+
+

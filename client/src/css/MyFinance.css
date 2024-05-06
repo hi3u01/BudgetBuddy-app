@@ -1,0 +1,15 @@
+  .contentContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .financeRecord {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .formContainer {
+    flex: 1;
+    margin-left: 10px; 
+  }
+  
