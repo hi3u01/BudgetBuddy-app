@@ -3,7 +3,7 @@ import '../css/MyFinance.css';
 import FinanceForm from '../FinanceForm';
 import FinanceGrid from '../FinanceGrid';
 
-function SavingPlan() {
+function MyFinance() {
   return (
     <div className="App">
       <div className ="contentContainer">
@@ -18,4 +18,4 @@ function SavingPlan() {
   );
 }
   
-export default SavingPlan;
+export default MyFinance;
